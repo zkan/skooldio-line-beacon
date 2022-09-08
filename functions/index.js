@@ -13,16 +13,25 @@ exports.myWebhook = functions.https.onRequest(async (request, response) => {
 
   for (const event of events) {
     // 3. Detect beacon event
-    if (event) {
+    if (event.type === "beacon") {
       // 4. Log body payload
+      functions.logger.info("BODY", request.body)
 
       // 5. Get userId
+      const userId = event.source.userId
       
       // 6. Get user profile
+      const profile = await util.getUserProfile(userId)
+      console.log("PROFILE", profile)
       
       // 7. Detect beacon type
-      switch (event) {
+      switch (event.beacon.type) {
         // 8. If beacon type is enter then reply with Flex message
+        case "enter":
+          let msg = template.enter1(profile)
+          await util.reply(event.replyToken, [msg])
+          break
+
         // 9. Replying personal messages separated by each device
 
         // 10. Create a Rich Menu then fill in your RICH MENU ID in util.js
