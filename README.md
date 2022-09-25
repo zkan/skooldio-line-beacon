@@ -16,3 +16,9 @@ Starting Firebase Local Emulator
 ```sh
 firebase emulators:start
 ```
+
+Deployment
+
+```sh
+firebase deploy
+```
