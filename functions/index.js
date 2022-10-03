@@ -19,11 +19,11 @@ exports.myWebhook = functions.https.onRequest(async (request, response) => {
 
       // 5. Get userId
       const userId = event.source.userId
-      
+
       // 6. Get user profile
       const profile = await util.getUserProfile(userId)
       console.log("PROFILE", profile)
-      
+
       // 7. Detect beacon type
       switch (event.beacon.type) {
         // 8. If beacon type is enter then reply with Flex message
